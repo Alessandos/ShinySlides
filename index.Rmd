@@ -1,0 +1,75 @@
+---
+title       : Guessing the Dice
+subtitle    : A little game in development
+author      : Alessandos
+job         : Learning Slidify and Shiny
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Slide 2: Guessing the Dice
+
+In this application five dice are thrown and your task is to guess what
+numbers were thrown.
+
+Let's have a look:
+```{r echo=TRUE}
+code <- sample.int(6, 5, replace=T)
+print(code)
+```
+
+So there are 5 numbers from 1 to 6 which are to guess.
+
+You could do the guessing with the 5 sliders on the left side
+of the application.
+
+
+---
+
+## Slide 3: The Information on the Right Side
+
+On the right side is a line-point diagram, in which you can see your guesses. They reflect the position of the sliders. Let's have a look:
+
+```{r echo=FALSE}
+plot(code, xlab='Dices 1 - 5', col='lightblue',main='Guessing the Numbers',
+           type="l", ylim=c(1, 6), ylab="Numbers")
+      points(code, col="red", pch=19)  
+```
+
+---
+
+## Slide 4: The Information Given:
+
+* The number of correct guessed dice (in number and position)
+```{r echo=FALSE}
+print(paste("code:  ", code[1], code[2], code[3], code[4], code[5]))
+guess <- sample.int(6, 5, replace=T)
+print(paste("guess: ", guess[1], guess[2], guess[3], guess[4], guess[5]))
+print(paste("correct numbers: ", sum(guess==code)))
+```
+
+* The number of correct guessed dice, if everything is in increasing order:
+```{r echo=FALSE}
+print(paste("sort(code) : ", sort(code)[1], sort(code)[2], sort(code)[3], sort(code)[4], sort(code)[5]))
+print(paste("sort(guess): ", sort(guess)[1], sort(guess)[2], sort(guess)[3], sort(guess)[4], sort(guess)[5]))
+print(paste("correct numbers, if in order: ", sum(sort(guess)==sort(code))))
+```
+
+---
+
+## Slide 5: Ideas for Changes in the Game
+
+This game is only a little example for a shiny project.
+But it could be enhanced with other features in further development:
+
+* Of course the solution must not be given. This was only for illustration.
+
+* There could be a prediction whether the dice are biased or not.
+
+* There could be information how many even numbers and how many odd numbers are tossed.
+
+* If the tossing continues, there could be a guess, what the next number tossed will be. This could be based on a Naive Bayes probability.
